@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Opening Timer...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        window.onload = function() {
+            // Get the 'data' parameter from the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const data = urlParams.get('data');
+
+            if (data) {
+                // Construct the custom scheme URL
+                // interval://import?data=...
+                const appUrl = "interval://import?data=" + data;
+                
+                // Redirect to the app
+                window.location.href = appUrl;
+                
+                // Optional: Show a message or fallback if app not installed
+                setTimeout(function() {
+                    document.getElementById('message').innerText = "アプリがインストールされていないようです。App Storeを開きますか？";
+                    // Here you could redirect to App Store
+                    // window.location.href = "https://apps.apple.com/jp/app/id6756897034";
+                }, 2000);
+            } else {
+                document.getElementById('message').innerText = "データが見つかりませんでした。";
+            }
+        };
+    </script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f2f2f7;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        h1 { font-size: 20px; margin-bottom: 10px; }
+        p { color: #888; margin-bottom: 20px; }
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="spinner"></div>
+        <h1 id="title">柔軟なタイマーを起動中...</h1>
+        <p id="message">アプリを開いています</p>
+    </div>
+</body>
+</html>
